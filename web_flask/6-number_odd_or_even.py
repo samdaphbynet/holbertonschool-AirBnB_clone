@@ -9,6 +9,8 @@ from markupsafe import escape
 
 
 app = Flask(__name__)
+app.jinja_env.trim_blocks = True
+app.jinja_env.lstrip_blocks = True
 
 
 @app.route("/", strict_slashes=False)
@@ -47,12 +49,7 @@ def display_template(n):
 
 @app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
 def display_odd_or_even(n):
-    if n % 2 == 0:
-        template = 'even'
-    else:
-        template = 'odd'
-    return render_template("6-number_odd_or_even.html",
-                           number=n, odd_even=template)
+    return render_template("6-number_odd_or_even.html", number=n)
 
 
 if __name__ == "__main__":
